@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://qcytr2ls5u1j"]
+
+[ext_resource type="Texture2D" uid="uid://d0ar1ten2g4k8" path="res://assets/bg.png" id="1_6rk4g"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_fu8cd"]
+[ext_resource type="PackedScene" uid="uid://bwvh2hj6tjfxm" path="res://scenes/pipe.tscn" id="2_ob4pe"]
+[ext_resource type="PackedScene" uid="uid://c7nv7ncteshuk" path="res://scenes/bird.tscn" id="3_ifpwd"]
+[ext_resource type="PackedScene" uid="uid://lrvhatdqjims" path="res://scenes/ground.tscn" id="4_y2qli"]
+[ext_resource type="FontFile" uid="uid://c0h6f046scs2c" path="res://assets/Minecraft.ttf" id="6_p3mdx"]
+[ext_resource type="PackedScene" uid="uid://bxfou50csg83m" path="res://scenes/gameover.tscn" id="7_wvrkh"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_fu8cd")
+pipe_scene = ExtResource("2_ob4pe")
+
+[node name="background" type="Sprite2D" parent="."]
+texture = ExtResource("1_6rk4g")
+offset = Vector2(432, 384)
+
+[node name="bird" parent="." instance=ExtResource("3_ifpwd")]
+
+[node name="ground" parent="." instance=ExtResource("4_y2qli")]
+z_index = 1
+
+[node name="pipetimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="scorelabel" type="Label" parent="."]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -127.0
+offset_top = 26.0
+offset_right = 129.0
+offset_bottom = 77.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_p3mdx")
+theme_override_font_sizes/font_size = 50
+text = "SCORE : 0"
+uppercase = true
+
+[node name="gameover" parent="." instance=ExtResource("7_wvrkh")]
+
+[connection signal="hit" from="ground" to="." method="_on_ground_hit"]
+[connection signal="timeout" from="pipetimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="gameover" to="." method="_on_gameover_restart"]
