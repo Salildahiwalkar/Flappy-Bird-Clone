@@ -30,7 +30,7 @@ This project is built to practice 2D game development, physics, collision detect
 ### 🔥 Running Locally
 1. Clone this repository:
     ```bash
-    git clone https://github.com/yourusername/flappy-bird-godot.git
+    git clone https://github.com/Salildahiwalkar/Flappy-Bird-Clone.git
     ```
 2. Open the project in Godot:
     - Launch Godot.
